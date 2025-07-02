@@ -25,6 +25,7 @@ cuda-programming/
 │   ├──                      # 
 │   ├──                      # 
 │   └──                      # 
+```
 
 📌 Goals
 Practice low-level CUDA C/C++ kernel programming
@@ -50,9 +51,6 @@ numba, numpy, matplotlib (optional for visualization)
 
 Install dependencies:
 
-bash
-Copy
-Edit
 pip install -r requirements.txt
 💡 Coming Up
 More optimization patterns (shared memory, streams, pinned memory)
