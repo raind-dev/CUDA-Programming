@@ -32,7 +32,7 @@ Install dependencies with pip:
 pip install numpy opencv-python matplotlib numba
 ```
 
-▶️ How to Run
+## ▶️ How to Run
 ```bash
 python main.py
 ```
@@ -44,13 +44,13 @@ Apply a Numba-accelerated function to compute a mask
 
 Display both original image and mask map side-by-side
 
-📷 Example Output
+## 📷 Example Output
 Original image vs. binary mask (e.g., pixels brighter than threshold):
 
 [ Original Image ]    [ Mask Map (white = masked) ]
 Masking logic can be customized based on brightness, color channels, or other features.
 
-🧪 Why Use Numba?
+## 🧪 Why Use Numba?
 Numba significantly speeds up the processing of large images by compiling your Python functions to optimized machine code (via LLVM). This is especially helpful for:
 
 Pixel-by-pixel operations
