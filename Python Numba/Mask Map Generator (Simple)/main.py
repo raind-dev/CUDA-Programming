@@ -40,7 +40,9 @@ d_results = cuda.device_array_like(results)
 
 print("\n\n---------Start to generate Mask Map")
 mask_map[blockspergrid, threadsperblock](d_img, d_results)
-print("Getting the results from device")
+print("Synchronize GPU")
+cuda.synchronize()
+print("Copy data to host: ")
 d_results.copy_to_host(results)
 
 plt.subplot(1, 2, 1)
