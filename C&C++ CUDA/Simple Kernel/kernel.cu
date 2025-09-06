@@ -69,7 +69,7 @@ void Print_Results(float* c, const int size)
 	}
 }
 
-bool To_Device()
+bool Check_CUDA_Capability()
 {
 	cudaError_t cudaStatus = cudaSetDevice(0);
 	if (cudaStatus != cudaSuccess) {
@@ -86,7 +86,7 @@ int main() {
 	float C[size];
 	float* ga = nullptr, * gb = nullptr, *gc = nullptr;
 	
-	if (!To_Device()) {
+	if (!Check_CUDA_Capability()) {
 		return 0;
 	}
 
