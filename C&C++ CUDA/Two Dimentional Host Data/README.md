@@ -17,7 +17,7 @@ The computation formula can be expressed as:
 
 ![Matrix Multiply and Add](https://github.com/raind-dev/CUDA-Programming/blob/main/C%26C%2B%2B%20CUDA/img/Matrix%20Multiply%20Addtion.jpg)
 
-![Matrix Multiply and Add V2](https://github.com/raind-dev/CUDA-Programming/blob/main/C%26C%2B%2B%20CUDA/img/Device%20Data%20Layout.jpg)
+![Matrix Multiply and Add V2](https://github.com/raind-dev/CUDA-Programming/blob/main/C%26C%2B%2B%20CUDA/img/Matrix%20Multiply%20Addtion%202.jpg)
 
 ## Thread Block Strategy
 - Each thread is responsible for accessing a set of elements (highlighted by different colors in my diagram).
