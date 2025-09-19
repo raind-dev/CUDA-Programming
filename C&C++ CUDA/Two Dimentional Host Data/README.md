@@ -45,6 +45,26 @@ __global__ void matrix_operations(int* mat, int* mul, int* scl, int* res, int N,
 }
 ```
 
+## Threads Running and Outputs
+There are some interesting things that I found, if we design the kernel to get the index from y-axis, and check threads running, you will see all of column threads in a row will be submitted in each time. 
+
+![Threads Running Order 1](../img/Thread%20Running%201.jpg) ![Threads Running Order 2](../img/Thread%20Running%202.jpg)
+
+And the second thing is that, if we add some output functions in CUDA kernel, like as below:
+```cpp
+__global__ void matMulAddKernel(int *res, const int *map, const int *mul, const int *s)
+{
+    int x = threadIdx.x + blockDim.x * blockIdx.x;
+    int y = threadIdx.y + blockDim.y * blockIdx.y;
+    printf("blockDim x: %d, X: %d , Y: %d\n", blockDim.x, x, y);
+    x = x + y * blockDim.x;
+    printf("Final x: %d\n", x);
+    res[x] = map[x] * mul[x] + s[x];
+}
+```
+
+The outputs order is not interlaced, it will be output as the first collection of outputs from all of threads, and then the second collection of outputs from all of threads. This is because of the threads running order and output logs from device will be stored in a buffer, once device running is done, then the buffer will be copied to host, and flush to stdout.
+
 ## Complexity & Next Steps
 - Current time complexity: O(N²), since each thread does nested loops.
 
