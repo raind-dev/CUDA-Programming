@@ -14,11 +14,11 @@ The goal is to deepen understanding of parallel computing, GPU acceleration tech
 ```bash
 cuda-programming/
 │
-├── cpp_cuda/                 # C/C++ with CUDA
-│   ├── Simple Kernel         # CUDA Learning Notes: Kernels (Day 1)
-│   ├──                       # 
-│   ├──                       # 
-│   └──                       # 
+├── cpp_cuda/                        # C/C++ with CUDA
+│   ├── Simple Kernel                # CUDA Learning Notes: Kernels (Day 1)
+│   ├── Two Dimentional Host Data    # CUDA Lenrning Notes: Kernels (Day 2)
+│   ├──                              # 
+│   └──                              # 
 │
 ├── python_numba/            # Python with Numba
 │   ├── Mask Map Generator   # Mask Map Generator for 3D Brain Viewer Project
