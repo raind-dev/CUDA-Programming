@@ -46,7 +46,7 @@ __global__ void matrix_operations(int* mat, int* mul, int* scl, int* res, int N,
 ```
 
 ## Threads Running and Outputs
-There are some interesting things that I found, if we design the kernel to get the index from y-axis, and check threads running, you will see all of column threads in a row will be submitted in each time. 
+There are some interesting things that I found, if we design the kernel to get the index from y-axis, and check threads running, you will see all of column threads in a row will be submitted in each time, but accutially, all of threads in a block are submitted parallelly. 
 
 ![Threads Running Order 1](../img/Thread%20Running%201.jpg) ![Threads Running Order 2](../img/Thread%20Running%202.jpg)
 
