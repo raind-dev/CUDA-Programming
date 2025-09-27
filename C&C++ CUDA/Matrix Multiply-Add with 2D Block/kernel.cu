@@ -47,12 +47,12 @@ bool is_cuda_available()
 }
 
 template<size_t C, size_t R>
-bool allocate_host_data(int (&map)[C][R], const char* name)
+bool allocate_host_data(int (&map)[R][C], const char* name)
 {
     srand(time(NULL));
     printf("%s: \n", name);
-    for (int i = 0; i < C; i++) {
-        for (int j = 0; j < R; j++) {
+    for (int i = 0; i < R; i++) {
+        for (int j = 0; j < C; j++) {
             map[i][j] = rand() % 2;
             printf("%d ", map[i][j]);
         }
@@ -73,9 +73,9 @@ bool allocate_device_data(int** device_buffer, int col, int row)
 }
 
 template<size_t C, size_t R>
-bool copy_host_data_to_device(int (&host_buffer)[C][R], int** device_buffer, const char* name)
+bool copy_host_data_to_device(int (&host_buffer)[R][C], int** device_buffer, const char* name)
 {
-	cudaError_t status = cudaMemcpy(*device_buffer, host_buffer, sizeof(int) * C * R, cudaMemcpyHostToDevice);
+	cudaError_t status = cudaMemcpy(*device_buffer, host_buffer, sizeof(int) * R * C, cudaMemcpyHostToDevice);
     if (status != cudaSuccess) {
 		fprintf(stderr, "Copy host data %s to device failed: %d\n", name, status);
 		return false;
@@ -89,9 +89,9 @@ int main()
         return -1;
     }
     const int col = 3, row = 3;
-    int mat[col][row];
+    int mat[row][col];
     int mul[row][col];
-    int scl[col][col];
+    int scl[row][col];
     int res[9] = { 0 };
     int* gpu_mat = nullptr;
     int* gpu_mul = nullptr;
@@ -102,10 +102,10 @@ int main()
         !allocate_host_data(scl, "Scalar")) {
         return -1;
     }
-    if (!allocate_device_data(&gpu_mat, col, row) || 
+    if (!allocate_device_data(&gpu_mat, row, col) ||
         !allocate_device_data(&gpu_mul, row, col) ||
-        !allocate_device_data(&gpu_scl, col, col) ||
-        !allocate_device_data(&gpu_res, col, col)) {
+        !allocate_device_data(&gpu_scl, row, col) ||
+        !allocate_device_data(&gpu_res, row, col)) {
         return -1;
     }
 	if (!copy_host_data_to_device(mat, &gpu_mat, "Matrix") ||
@@ -140,7 +140,7 @@ int main()
         fprintf(stderr, "Can not copy the results from device to host\n");
         return -1;
     }
-    printf("\n\nThe V1 Results: \n");
+    printf("\n\nThe V2 Results: \n");
     for (int i = 0; i < sizeof(res) / sizeof(int); i++) {
         printf("%d ", res[i]);
         if (i % col == 2) {
