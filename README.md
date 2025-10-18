@@ -14,11 +14,12 @@ The goal is to deepen understanding of parallel computing, GPU acceleration tech
 ```bash
 cuda-programming/
 │
-├── cpp_cuda/                                # C/C++ with CUDA
-│   ├── Simple Kernel                        # CUDA Learning Notes: Kernels (Day 1)
-│   ├── Matrix Multiply-Add with 1D Block    # CUDA Lenrning Notes: Kernels (Day 2)
-│   ├── Matrix Multiply-Add with 2D Block    # CUDA Learning Notes: Kernels (Day 3) 
-│   └──                                      # 
+├── cpp_cuda/                                                   # C/C++ with CUDA
+│   ├── Simple Kernel                                           # CUDA Learning Notes: Kernels (Day 1)
+│   ├── Matrix Multiply-Add with 1D Block                       # CUDA Lenrning Notes: Kernels (Day 2)
+│   ├── Matrix Multiply-Add with 2D Block                       # CUDA Learning Notes: Kernels (Day 3) 
+│   ├── Exploring cudaMallocPitch vs cudaMalloc                 # CUDA Learning Notes: Kernels (Day 4)
+│   └── Matrix Multiply-Add with Shared Memory Optimization     # CUDA Learning Notes: Kernels (Day 5)
 │
 ├── python_numba/            # Python with Numba
 │   ├── Mask Map Generator   # Mask Map Generator for 3D Brain Viewer Project
