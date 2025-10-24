@@ -17,4 +17,4 @@ To ensure correctness, we use the __syncthreads() instruction to synchronize all
 For safety, I also inserted __syncthreads() calls after each multiply-add operation on shared memory.
 However, strictly speaking, this additional synchronization is unnecessary, since the shared memory data is not overwritten afterward.
 
-👉 Next step: measure performance differences between global memory and shared memory implementations, and analyze how memory coalescing affects execution time.
+👉 Future work: measure performance differences between global memory and shared memory implementations, and analyze how memory coalescing affects execution time.
