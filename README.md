@@ -19,7 +19,8 @@ cuda-programming/
 │   ├── Matrix Multiply-Add with 1D Block                       # CUDA Lenrning Notes: Kernels (Day 2)
 │   ├── Matrix Multiply-Add with 2D Block                       # CUDA Learning Notes: Kernels (Day 3) 
 │   ├── Exploring cudaMallocPitch vs cudaMalloc                 # CUDA Learning Notes: Kernels (Day 4)
-│   └── Matrix Multiply-Add with Shared Memory Optimization     # CUDA Learning Notes: Kernels (Day 5)
+│   ├── Matrix Multiply-Add with Shared Memory Optimization     # CUDA Learning Notes: Kernels (Day 5)
+│   └── 3D Memory Allocation with cudaMalloc3D                  # CUDA Learning Notes: Kernels (Day 6)
 │
 ├── python_numba/            # Python with Numba
 │   ├── Mask Map Generator   # Mask Map Generator for 3D Brain Viewer Project
