@@ -9,21 +9,21 @@ __global__ void matrix_operations_with_shared_memory_and_tiling(int* mat, int* m
 {
     int x = threadIdx.x;
     int y = threadIdx.y;
-	int bx = blockIdx.x;
-	int by = blockIdx.y;
+    int bx = blockIdx.x;
+    int by = blockIdx.y;
     const int tile_dim = 3;
     int pitch_idx = pitch / sizeof(int);
     int tile_number = (col_row + tile_dim - 1) / tile_dim;
     __shared__ int mat_shared[tile_dim][tile_dim];
     __shared__ int mul_shared[tile_dim][tile_dim];
-    __shared__ int scl_shared[tile_dim][tile_dim];
-	int tile_mat_start_pos = by * tile_dim;
-    int tile_mul_start_pos = bx * tile_dim;
+    int tiler_ty = by * tile_dim + y; // Actually, tile_dim = blockDim
+    int tiler_tx = bx * tile_dim + x;
     int tmp = 0;
     for (int i = 0; i < tile_number; i++) { // total run = 2
         if (x < col_row && y < col_row) {
-            mat_shared[y][x] = mat[(tile_mat_start_pos + y) * pitch_idx + i * tile_dim + x];
-            mul_shared[y][x] = mul[tile_mul_start_pos + ((i * tile_dim + y) * pitch_idx) + x];
+			int tiler_shift = i * tile_dim;
+            mat_shared[y][x] = mat[tiler_ty * pitch_idx + tiler_shift + x];
+            mul_shared[y][x] = mul[tiler_tx + (tiler_shift + y) * pitch_idx];
         }
         __syncthreads();
         for (int j = 0; j < tile_dim; j++) {
@@ -31,8 +31,8 @@ __global__ void matrix_operations_with_shared_memory_and_tiling(int* mat, int* m
         }
         __syncthreads();
     }
-	int gx = bx * blockDim.x + x;
-	int gy = by * blockDim.y + y;
+    int gx = bx * blockDim.x + x;
+    int gy = by * blockDim.y + y;
     res[gy * pitch_idx + gx] = tmp;
 }
 
@@ -110,7 +110,7 @@ int main()
     }
     const int col = 6, row = 6;
     int mat[row][col] = {
-        {1, 0, 1, 0, 0, 1}, 
+        {1, 0, 1, 0, 0, 1},
         {0, 0, 1, 0, 1, 1},
         {1, 1, 0, 1, 0, 0},
         {1, 0, 1, 0, 0, 0},
@@ -133,7 +133,7 @@ int main()
         {3, 5, 3, 1, 3, 2},
         {3, 3, 3, 1, 1, 2}
     };
-    int res[row][col] = {0};
+    int res[row][col] = { 0 };
     int* gpu_mat = nullptr;
     int* gpu_mul = nullptr;
     int* gpu_res = nullptr;
@@ -164,11 +164,11 @@ int main()
     }
     printf("\n\nThe Results: \n");
     bool correct = true;
-    for (int r = 0; r < row ; r++) {
+    for (int r = 0; r < row; r++) {
         for (int c = 0; c < col; c++) {
             printf("%d ", res[r][c]);
             if (gol[r][c] != res[r][c])
-				correct = false;
+                correct = false;
         }
         printf("\n");
     }
@@ -177,7 +177,7 @@ int main()
         printf("The result matrix is the same with the golden!\n");
     }
     else {
-		printf("The result matrix is different with the golden!\n");
+        printf("The result matrix is different with the golden!\n");
     }
 
     cudaFree(gpu_mat);
