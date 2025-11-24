@@ -21,7 +21,8 @@ cuda-programming/
 │   ├── Exploring cudaMallocPitch vs cudaMalloc                 # CUDA Learning Notes: Kernels (Day 4)
 │   ├── Matrix Multiply-Add with Shared Memory Optimization     # CUDA Learning Notes: Kernels (Day 5)
 │   ├── 3D Memory Allocation with cudaMalloc3D                  # CUDA Learning Notes: Kernels (Day 6)
-│   └── Matrix Multiplication with Shared Memory Tiling         # CUDA Learning Notes: Kernels (Day 7)
+│   ├── Matrix Multiplication with Shared Memory Tiling         # CUDA Learning Notes: Kernels (Day 7)
+│   └── Inserting Timestamp for Performance Evaluation          # CUDA Learning Notes: Kernels (Day 8)
 │
 ├── python_numba/            # Python with Numba
 │   ├── Mask Map Generator   # Mask Map Generator for 3D Brain Viewer Project
