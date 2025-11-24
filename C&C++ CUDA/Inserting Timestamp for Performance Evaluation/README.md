@@ -38,3 +38,6 @@ cudaEventElapsedTime(&ms, start, stop);
 to obtain the elapsed time (in milliseconds, as a floating-point value) between the two timestamps.
 
 With this setup, you can wrap any kernel — or even a sequence of kernels — and benchmark performance with precise CUDA-level timing.
+
+From the output of this example, you’ll notice that the kernel using Shared Memory Tiling actually runs slower. This indicates that there’s significant room for optimization.
+And that brings us to the next topic we’ll be exploring: Memory Coalescing.
