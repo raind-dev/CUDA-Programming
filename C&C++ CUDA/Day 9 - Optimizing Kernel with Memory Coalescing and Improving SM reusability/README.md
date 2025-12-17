@@ -36,3 +36,5 @@ To maximize efficiency:
 - Ensure threads access contiguous memory, and
 
 - Favor block and grid dimensions that align with multiples of 32.
+
+3. Since I evaluated the time consumption of Day 8 example, and found that the kernel with shared memory is slower than the kernel without shared memory, so probably the kernel with shared memory should be fine-tune with a larger shared memory to gain the maximum benifit from using shared memory.  
